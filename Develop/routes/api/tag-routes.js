@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   // find all tags
   // be sure to include its associated Product data
   ProductTag.findAll({
-    include:[Product]
+    include: []
       })
         .then(dbProducts => {
           res.json(dbProducts);
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
-  Product.findByPk(req.params.id, { include: [Product]})
+  ProductTag.findByPk(req.params.id, { include: [Product]})
   .then(dbProducts => {
     res.json(dbProducts);
   })
