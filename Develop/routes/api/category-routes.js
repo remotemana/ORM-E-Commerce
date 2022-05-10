@@ -1,5 +1,8 @@
 const router = require('express').Router();
-const { Category, Product } = require('../../models');
+const {
+  Category,
+  Product
+} = require('../../models');
 
 // The `/api/categories` endpoint
 
@@ -7,14 +10,17 @@ router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
   Category.findAll({
-include:[Product]
-  })
+      include: [Product]
+    })
     .then(dbCategorys => {
       res.json(dbCategorys);
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ msg: "an error occured", err });
+      res.status(500).json({
+        msg: "an error occured",
+        err
+      });
     });
 });
 
@@ -27,7 +33,10 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ msg: "an error occured", err });
+      res.status(500).json({
+        msg: "an error occured",
+        err
+      });
     });
 });
 
@@ -39,38 +48,47 @@ router.post('/', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ msg: "an error occured", err });
+      res.status(500).json({
+        msg: "an error occured",
+        err
+      });
     });
 });
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
   Category.update(req.body, {
-    where: {
-      id: req.params.id
-    }
-  }).then(updatedCategory => {
-    res.json(updatedCategory);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json({ msg: "an error occured", err });
-  });
+      where: {
+        id: req.params.id
+      }
+    }).then(updatedCategory => {
+      res.json(updatedCategory);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        msg: "an error occured",
+        err
+      });
+    });
 });
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
   Category.destroy({
-    where: {
-      id: req.params.id
-    }
-  }).then(delCategory => {
-    res.json(delCategory);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json({ msg: "an error occured", err });
-  });
+      where: {
+        id: req.params.id
+      }
+    }).then(delCategory => {
+      res.json(delCategory);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        msg: "an error occured",
+        err
+      });
+    });
 });
 
 module.exports = router;
